@@ -203,7 +203,7 @@ class Grade_management_programe:
             conn = self.connect_db()
             cursor = conn.cursor()
 
-            # 1. 기존 정보 조회
+            #기존 결과 조회 
             cursor.execute(
                 "SELECT subject, score FROM grades WHERE id_grade=%s",
                 (grade_id,)
@@ -218,10 +218,9 @@ class Grade_management_programe:
 
             print(f"--- 현재 정보: {subject} ({old_score}점) ---")
 
-            # 2. 새 점수 입력
             new_score = int(input("- 수정할 점수 입력: "))
 
-            # 3. 업데이트 실행
+      
             cursor.execute(
                 "UPDATE grades SET score=%s WHERE id_grade=%s",
                 (new_score, grade_id)
@@ -230,7 +229,7 @@ class Grade_management_programe:
             conn.commit()
             conn.close()
 
-            # 4. 결과 출력
+            
             print(f"\n[시스템] 성적 수정이 완료되었습니다. ({old_score}점 -> {new_score}점)")
 
         except Exception as e:
